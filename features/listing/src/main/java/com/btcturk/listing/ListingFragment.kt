@@ -2,14 +2,17 @@ package com.btcturk.listing
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import com.btcturk.base.types.FragmentBindingInflater
 import com.btcturk.base.ui.BaseFragment
 import com.btcturk.data.dto.ticker.TickerData
+import com.btcturk.data.local.PairEntity
+import com.btcturk.listing.adapter.FavoritesAdapter
 import com.btcturk.listing.adapter.ListingAdapter
 import com.btcturk.listing.databinding.FragmentListingBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,8 +25,12 @@ class ListingFragment : BaseFragment<FragmentListingBinding>() {
     override fun inflate(): FragmentBindingInflater<FragmentListingBinding> =
         FragmentListingBinding::inflate
 
-    private val viewModel: ListingViewModel by viewModels()
+    private var tickerList: ArrayList<TickerData>? = null
 
+    private var listingAdapter: ListingAdapter? = null
+    private var favoritesAdapter: FavoritesAdapter? = null
+
+    private val viewModel: ListingViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +48,31 @@ class ListingFragment : BaseFragment<FragmentListingBinding>() {
                 }
 
                 is ListingViewModel.TickerEvent.Success -> {
-                    setupTickerAdapter(it.tickerResponse?.data)
+                    tickerList = it.tickerResponse?.data
+                    setupTickerAdapter(tickerList)
+                }
+                is ListingViewModel.TickerEvent.FavoriteList -> {
+                    setupFavoritesAdapter(it.favoriteList as ArrayList<PairEntity>)
+                }
+                is ListingViewModel.TickerEvent.HasAdded -> {
+                    if (it.hasAdded) {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.added_to_favorites,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.removed_from_favorites,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                    tickerList?.indexOf(it.tickerData)
+                        ?.let { index -> listingAdapter?.notifyItemChanged(index) }
+
+                    viewModel.fetchFavoriteList()
                 }
             }
         }.launchIn(lifecycleScope)
@@ -49,7 +80,28 @@ class ListingFragment : BaseFragment<FragmentListingBinding>() {
 
     private fun setupTickerAdapter(data: ArrayList<TickerData>?) {
         data?.let {
-            val listingAdapter = ListingAdapter(it) { tickerData ->
+            listingAdapter = ListingAdapter(it, { tickerData ->
+                val action =
+                    ListingFragmentDirections.listToDetail(
+                        tickerData?.pair,
+                        (tickerData?.timestamp?.div(1000)).toString()
+                    )
+                findNavController().navigate(action)
+            }, { ticker ->
+                ticker?.let {
+                    viewModel.checkExistFavoritesAndAction(ticker)
+                }
+            })
+            binding.rvTicker.adapter = listingAdapter
+        }
+    }
+
+    private fun setupFavoritesAdapter(favoriteList: ArrayList<PairEntity>) {
+        if (favoriteList.size > 0) {
+            binding.tvFavorites.visibility = VISIBLE
+            binding.rvFavorites.visibility = VISIBLE
+
+            favoritesAdapter = FavoritesAdapter(favoriteList) { tickerData ->
                 val action =
                     ListingFragmentDirections.listToDetail(
                         tickerData?.pair,
@@ -57,7 +109,10 @@ class ListingFragment : BaseFragment<FragmentListingBinding>() {
                     )
                 findNavController().navigate(action)
             }
-            binding.rvTicker.adapter = listingAdapter
+            binding.rvFavorites.adapter = favoritesAdapter
+        } else {
+            binding.tvFavorites.visibility = GONE
+            binding.rvFavorites.visibility = GONE
         }
     }
 }

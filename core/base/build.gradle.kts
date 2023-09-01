@@ -7,5 +7,6 @@ dependencies {
     implementation(Dependencies.Material)
     implementation(Dependencies.Androidx.Kotlin)
     implementation(Dependencies.Androidx.CoreKtx)
+    room()
     glide()
 }

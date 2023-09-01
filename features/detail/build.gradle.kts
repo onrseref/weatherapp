@@ -5,7 +5,6 @@ apply<AndroidLibraryPlugin>()
 apply(plugin = Plugins.Hilt)
 
 dependencies {
-
     implementation(Dependencies.Androidx.AppCompat)
     implementation(Dependencies.Androidx.ConstraintLayout)
     implementation(Dependencies.Material)

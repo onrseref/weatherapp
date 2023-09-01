@@ -37,7 +37,7 @@ object Dependencies {
 
     const val Material = "com.google.android.material:material:${Versions.Material}"
 
-    const val MPAndroidChart= "com.github.PhilJay:MPAndroidChart:${Versions.MPAndroidChart}"
+    const val MPAndroidChart = "com.github.PhilJay:MPAndroidChart:${Versions.MPAndroidChart}"
 
     object Navigation {
         const val NavigationFragment =
@@ -57,9 +57,12 @@ object Dependencies {
         const val ConstraintLayout =
             "androidx.constraintlayout:constraintlayout:${Versions.Androidx.ConstraintLayout}"
 
-        const val Paging = "androidx.paging:paging-runtime-ktx:${Versions.Androidx.Paging}"
-
-        const val ViewPager2 = "androidx.viewpager2:viewpager2:${Versions.Androidx.ViewPager2}"
+        object Room {
+            const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.Androidx.Room}"
+            const val ROOM_COMPILER =
+                "androidx.room:room-compiler:${Versions.Androidx.Room}"
+            const val ROOM_KTX = "androidx.room:room-ktx:${Versions.Androidx.Room}"
+        }
 
         object Lifecycle {
             private const val LifecycleVersion = "2.4.0"
@@ -84,12 +87,6 @@ object Dependencies {
         const val ArchCore = "androidx.arch.core:core-testing:${Versions.ArchCore}"
         const val Truth = "com.google.truth:truth:${Versions.Truth}"
     }
-}
-
-fun DependencyHandler.lifecycle() {
-    implementation(Dependencies.Androidx.Lifecycle.Extensions)
-    implementation(Dependencies.Androidx.Lifecycle.LiveDataKtx)
-    implementation(Dependencies.Androidx.Lifecycle.ViewModelKtx)
 }
 
 private fun DependencyHandler.compileOnly(depName: String) {

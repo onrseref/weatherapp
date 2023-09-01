@@ -7,5 +7,6 @@ data class TickerData(
     var volume: Double? = null,
     var dailyPercent: Double? = null,
     var numeratorSymbol: String? = null,
-    var timestamp: Long? = null
+    var timestamp: Long? = null,
+    var isFavorite: Boolean = false
 )

@@ -2,6 +2,12 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 
+fun DependencyHandler.room() {
+    kapt(Dependencies.Androidx.Room.ROOM_COMPILER)
+    implementation(Dependencies.Androidx.Room.ROOM_RUNTIME)
+    implementation(Dependencies.Androidx.Room.ROOM_KTX)
+}
+
 fun DependencyHandler.hilt() {
     implementation(Dependencies.Hilt.Android)
     kapt(Dependencies.Hilt.AndroidCompiler)
@@ -42,6 +48,7 @@ fun DependencyHandler.unitTest() {
 fun DependencyHandler.implementation(depName: String) {
     add("implementation", depName)
 }
+
 fun DependencyHandler.testImplementation(depName: String) {
     add("testImplementation", depName)
 }
@@ -54,6 +61,9 @@ fun DependencyHandler.releaseImplementation(dependencyNotation: Any): Dependency
 
 fun DependencyHandler.implementation(dependencyNotation: Any): Dependency? =
     add("implementation", dependencyNotation)
+
+fun DependencyHandler.annotationProcessor(dependencyNotation: Any): Dependency? =
+    add("annotationProcessor", dependencyNotation)
 
 private fun DependencyHandler.kapt(depName: String) {
     add("kapt", depName)

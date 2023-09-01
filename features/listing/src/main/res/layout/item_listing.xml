@@ -9,15 +9,14 @@
     android:paddingHorizontal="@dimen/dp8"
     android:paddingVertical="@dimen/dp8">
 
-
     <ImageView
         android:id="@+id/iv_favorite"
         android:layout_width="@dimen/dp24"
         android:layout_height="@dimen/dp24"
+        android:src="@drawable/ic_favorite_empty"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/green" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_pair"

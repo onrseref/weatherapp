@@ -2,15 +2,18 @@ package com.btcturk.listing.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.btcturk.data.dto.ticker.TickerData
+import com.btcturk.listing.R
 import com.btcturk.listing.databinding.ItemListingBinding
 import java.text.DecimalFormat
 import kotlin.math.round
 
 class ListingAdapter(
     private val data: ArrayList<TickerData>,
-    private val onItemClick: (TickerData?) -> Unit
+    private val onItemClick: (TickerData?) -> Unit,
+    private val onFavoriteClick: (TickerData?) -> Unit
 ) : RecyclerView.Adapter<ListingAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -24,13 +27,32 @@ class ListingAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bindData(data[position], onItemClick)
+        holder.bindData(data[position], onItemClick, onFavoriteClick)
     }
 
     class ItemViewHolder(private val binding: ItemListingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(tickerData: TickerData, onItemClick: (TickerData?) -> Unit) {
+        fun bindData(
+            tickerData: TickerData,
+            onItemClick: (TickerData?) -> Unit,
+            onFavoriteClick: (TickerData?) -> Unit
+        ) {
+            if (tickerData.isFavorite) {
+                binding.ivFavorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        binding.root.context,
+                        R.drawable.ic_favorite
+                    )
+                )
+            } else {
+                binding.ivFavorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        binding.root.context,
+                        R.drawable.ic_favorite_empty
+                    )
+                )
+            }
             val decimalFormat = DecimalFormat("0.000")
 
             binding.tvPair.text = tickerData.pair
@@ -52,6 +74,10 @@ class ListingAdapter(
 
             binding.root.setOnClickListener {
                 onItemClick(tickerData)
+            }
+
+            binding.ivFavorite.setOnClickListener {
+                onFavoriteClick(tickerData)
             }
         }
     }
