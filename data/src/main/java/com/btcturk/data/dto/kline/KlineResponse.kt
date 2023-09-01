@@ -1,6 +1,6 @@
 package com.btcturk.data.dto.kline
 
 data class KlineResponse(
-    var t: ArrayList<Int> = arrayListOf(),
-    var c: ArrayList<Int> = arrayListOf(),
+    var t: ArrayList<Double> = arrayListOf(),
+    var c: ArrayList<Double> = arrayListOf(),
 )

@@ -16,7 +16,7 @@ class KlineRepositoryImpl @Inject constructor(private val klineService: KlineSer
     override suspend fun fetchKline(pair: String, to: String): Flow<Resource<KlineResponse>> {
         return flow {
             emit(safeApiCall(Dispatchers.IO) {
-                klineService.fetchTicker(pair, BuildConfig.RESOLUTION, to, "1602925320")
+                klineService.fetchTicker(pair, BuildConfig.RESOLUTION, to, "1691589765")
             })
         }
     }
