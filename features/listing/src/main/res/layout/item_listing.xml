@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp2"
+    android:background="@color/black"
+    android:paddingHorizontal="@dimen/dp8"
+    android:paddingVertical="@dimen/dp8">
+
+
+    <ImageView
+        android:id="@+id/iv_favorite"
+        android:layout_width="@dimen/dp24"
+        android:layout_height="@dimen/dp24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/green" />
+
+    <TextView
+        android:id="@+id/tv_pair"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp8"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guideline"
+        app:layout_constraintStart_toEndOf="@id/iv_favorite"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Pair Name" />
+
+    <TextView
+        android:id="@+id/tv_last"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp4"
+        android:gravity="end"
+        android:lines="1"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/tv_daily_percent"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Last" />
+
+    <TextView
+        android:id="@+id/tv_daily_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:lines="1"
+        android:textColor="@color/green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Daily Percent" />
+
+    <TextView
+        android:id="@+id/tv_volume"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp4"
+        android:gravity="end"
+        android:lines="1"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toStartOf="@id/tv_numerator_symbol"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/tv_last"
+        tools:text="Volume" />
+
+    <TextView
+        android:id="@+id/tv_numerator_symbol"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:lines="1"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_last"
+        tools:text="Numerator Symbol" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.33" />
+</androidx.constraintlayout.widget.ConstraintLayout>
