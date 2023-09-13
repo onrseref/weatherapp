@@ -1,7 +1,0 @@
-<resources>
-    <string name="service_error">Service Error</string>
-    <string name="favorites">Favorites</string>
-    <string name="pairs">Pairs</string>
-    <string name="added_to_favorites">Added to Favorites</string>
-    <string name="removed_from_favorites">Removed from Favorites</string>
-</resources>

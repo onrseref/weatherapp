@@ -9,8 +9,11 @@ import javax.inject.Inject
 
 class WeatherUseCase @Inject constructor(private val weatherRepository: WeatherRepository) {
 
-    suspend operator fun invoke(): Flow<Resource<WeatherResponse>> = flow {
-        weatherRepository.fetchWeather().collect { result ->
+    suspend operator fun invoke(
+        latitude: String,
+        longitude: String
+    ): Flow<Resource<WeatherResponse>> = flow {
+        weatherRepository.fetchWeather(latitude, longitude).collect { result ->
             when (result) {
                 is Resource.Error -> {
                     emit(

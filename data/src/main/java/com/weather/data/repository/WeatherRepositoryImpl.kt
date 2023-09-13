@@ -1,5 +1,6 @@
 package com.weather.data.repository
 
+import com.weather.data.BuildConfig
 import com.weather.data.dto.WeatherResponse
 import com.weather.data.service.WeatherService
 import com.weather.data.util.Resource
@@ -11,10 +12,19 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val weatherService: WeatherService) :
     WeatherRepository {
-    override suspend fun fetchWeather(): Flow<Resource<WeatherResponse>> {
+    override suspend fun fetchWeather(
+        latitude: String,
+        longitude: String
+    ): Flow<Resource<WeatherResponse>> {
         return flow {
             emit(safeApiCall(Dispatchers.IO) {
-                weatherService.fetchWeather()
+                weatherService.fetchWeather(
+                    latitude,
+                    longitude,
+                    BuildConfig.DAILY,
+                    BuildConfig.TIMEZONE,
+                    true
+                )
             })
         }
     }

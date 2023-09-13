@@ -55,16 +55,20 @@ class AndroidLibraryPlugin : Plugin<Project> {
                     isDebuggable = false
                     isMinifyEnabled = true
                     proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
-                    buildConfigStringField("BASE_URL", "https://api.weather.com")
+                    buildConfigStringField("BASE_URL", "https://api.open-meteo.com")
                     buildConfigStringField("SESSION_TIMEOUT", "120")
+                    buildConfigStringField("DAILY", "temperature_2m_max,temperature_2m_min")
+                    buildConfigStringField("TIMEZONE", "auto")
                 }
 
                 getByName("debug") {
                     isDebuggable = true
                     isMinifyEnabled = false
                     proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
-                    buildConfigStringField("BASE_URL", "https://api.weather.com")
+                    buildConfigStringField("BASE_URL", "https://api.open-meteo.com")
                     buildConfigStringField("SESSION_TIMEOUT", "120")
+                    buildConfigStringField("DAILY", "temperature_2m_max,temperature_2m_min")
+                    buildConfigStringField("TIMEZONE", "auto")
                 }
             }
         }

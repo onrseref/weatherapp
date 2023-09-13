@@ -21,7 +21,7 @@ dependencies {
     implementation(project(Modules.Base))
     implementation(project(Modules.Data))
     implementation(project(Modules.Domain))
-    implementation(project(Modules.Listing))
+    implementation(project(Modules.Home))
     implementation(Dependencies.Androidx.AppCompat)
     implementation(Dependencies.Androidx.ConstraintLayout)
     implementation(Dependencies.Material)
