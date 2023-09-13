@@ -4,25 +4,8 @@
     android:id="@+id/list_navigation"
     app:startDestination="@id/fragment_navigation_list">
 
-    <include app:graph="@navigation/detail_navigation" />
-
     <fragment
         android:id="@+id/fragment_navigation_list"
-        android:name="com.btcturk.listing.ListingFragment"
-        app:launchSingleTop="true">
-
-        <action
-            android:id="@+id/list_to_detail"
-            app:destination="@id/detail_navigation">
-
-            <argument
-                android:name="pair"
-                app:argType="string"
-                app:nullable="true" />
-            <argument
-                android:name="to"
-                app:argType="string"
-                app:nullable="true" />
-        </action>
-    </fragment>
+        android:name="com.weather.listing.ListingFragment"
+        app:launchSingleTop="true" />
 </navigation>

@@ -16,7 +16,6 @@ dependencies {
     implementation(project(Modules.Base))
     implementation(project(Modules.Domain))
     implementation(project(Modules.Data))
-    implementation(project(Modules.Detail))
     hilt()
     glide()
     navigation()
