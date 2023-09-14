@@ -8,4 +8,7 @@
     <color name="white">#F8F8F8</color>
     <color name="green">#009C21</color>
     <color name="red">#D6301E</color>
+    <color name="orange">#FFA500</color>
+    <color name="sky">#63C5DA</color>
+    <color name="transparent">#1AFFFFFF</color>
 </resources>

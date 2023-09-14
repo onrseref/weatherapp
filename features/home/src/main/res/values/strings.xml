@@ -1,3 +1,18 @@
 <resources>
     <string name="service_error">Service Error</string>
+    <string name="clear_sky">Clear Sky</string>
+    <string name="overcast">Overcast</string>
+    <string name="rainy">Rainy</string>
+    <string name="snowy">Snowy</string>
+    <string name="fog">Fog</string>
+    <string name="drizzle">Drizzle</string>
+    <string name="freezing_drizzle">Freezing Drizzle</string>
+    <string name="freezing_rain">Freezing Rain</string>
+    <string name="snow_fall">Snow Fall</string>
+    <string name="snow_grains">Snow Grains</string>
+    <string name="rain_showers">Rain Showers</string>
+    <string name="snow_showers">Snow Showers</string>
+    <string name="thunderstorm">Thunderstorm</string>
+    <string name="max_temp">Max</string>
+    <string name="min_temp">Min</string>
 </resources>

@@ -12,15 +12,12 @@ import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(private val weatherService: WeatherService) :
     WeatherRepository {
-    override suspend fun fetchWeather(
-        latitude: String,
-        longitude: String
-    ): Flow<Resource<WeatherResponse>> {
+    override suspend fun fetchWeather(): Flow<Resource<WeatherResponse>> {
         return flow {
             emit(safeApiCall(Dispatchers.IO) {
                 weatherService.fetchWeather(
-                    latitude,
-                    longitude,
+                    BuildConfig.LATITUDE,
+                    BuildConfig.LONGITUDE,
                     BuildConfig.DAILY,
                     BuildConfig.TIMEZONE,
                     true

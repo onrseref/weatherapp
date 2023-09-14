@@ -57,8 +57,13 @@ class AndroidLibraryPlugin : Plugin<Project> {
                     proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
                     buildConfigStringField("BASE_URL", "https://api.open-meteo.com")
                     buildConfigStringField("SESSION_TIMEOUT", "120")
-                    buildConfigStringField("DAILY", "temperature_2m_max,temperature_2m_min")
+                    buildConfigStringField(
+                        "DAILY",
+                        "weathercode,temperature_2m_max,temperature_2m_min"
+                    )
                     buildConfigStringField("TIMEZONE", "auto")
+                    buildConfigStringField("LATITUDE", "57.7009921")
+                    buildConfigStringField("LONGITUDE", "11.8938365")
                 }
 
                 getByName("debug") {
@@ -67,8 +72,13 @@ class AndroidLibraryPlugin : Plugin<Project> {
                     proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
                     buildConfigStringField("BASE_URL", "https://api.open-meteo.com")
                     buildConfigStringField("SESSION_TIMEOUT", "120")
-                    buildConfigStringField("DAILY", "temperature_2m_max,temperature_2m_min")
+                    buildConfigStringField(
+                        "DAILY",
+                        "weathercode,temperature_2m_max,temperature_2m_min"
+                    )
                     buildConfigStringField("TIMEZONE", "auto")
+                    buildConfigStringField("LATITUDE", "57.7009921")
+                    buildConfigStringField("LONGITUDE", "11.8938365")
                 }
             }
         }

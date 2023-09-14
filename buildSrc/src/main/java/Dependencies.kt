@@ -37,8 +37,6 @@ object Dependencies {
 
     const val Material = "com.google.android.material:material:${Versions.Material}"
 
-    const val MPAndroidChart = "com.github.PhilJay:MPAndroidChart:${Versions.MPAndroidChart}"
-
     object Navigation {
         const val NavigationFragment =
             "androidx.navigation:navigation-fragment-ktx:${Versions.Navigation}"

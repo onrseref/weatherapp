@@ -2,20 +2,19 @@ package com.weather.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.weather.home.R
-import com.weather.home.databinding.ItemListingBinding
-import java.text.DecimalFormat
+import com.weather.data.dto.Daily
+import com.weather.home.databinding.ItemDailyBinding
+import com.weather.home.util.Util
 
 class HomeAdapter(
-    private val data: ArrayList<Int>,
-    private val onItemClick: (Int?) -> Unit
+    private val daily: Daily,
+    private val tempUnit: String?
 ) : RecyclerView.Adapter<HomeAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(
-            ItemListingBinding.inflate(
+            ItemDailyBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -24,40 +23,46 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bindData(data[position], onItemClick)
+        holder.bindData(
+            daily.time[position],
+            daily.weathercode[position],
+            daily.temperature2mMax[position],
+            daily.temperature2mMin[position],
+            tempUnit
+        )
     }
 
-    class ItemViewHolder(private val binding: ItemListingBinding) :
+    class ItemViewHolder(private val binding: ItemDailyBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(
-            weatherData: Int,
-            onItemClick: (Int?) -> Unit
+            day: String,
+            weatherCode: Int,
+            maxTemp: Double,
+            minTemp: Double,
+            tempUnit: String?
         ) {
-            /*val decimalFormat = DecimalFormat("0.000")
 
-            binding.tvPair.text = weatherData.pair
-            binding.tvLast.text = decimalFormat.format(weatherData.last)
-            binding.tvVolume.text = decimalFormat.format(weatherData.volume)
-            binding.tvDailyPercent.text = buildString {
-                append("%")
-                append(weatherData.dailyPercent.toString())
-            }
-            binding.tvNumeratorSymbol.text = weatherData.numeratorSymbol
+            with(binding) {
+                tvDay.text = Util.currentDateTime(day)
 
-            weatherData.dailyPercent?.let {
-                if (it > 0) {
-                    binding.tvDailyPercent.setTextColor(binding.tvDailyPercent.context.getColor(com.weather.base.R.color.green))
-                } else {
-                    binding.tvDailyPercent.setTextColor(binding.tvDailyPercent.context.getColor(com.weather.base.R.color.red))
+                tvMaxTemp.text = buildString {
+                    append(maxTemp.toString())
+                    append(" ")
+                    append(tempUnit)
                 }
-            }*/
+                tvMinTemp.text = buildString {
+                    append(minTemp.toString())
+                    append(" ")
+                    append(tempUnit)
+                }
 
-            binding.root.setOnClickListener {
-                onItemClick(weatherData)
+                Util.getWeatherType(weatherCode, root.context)?.let {
+                    ivWeather.setImageResource(it.weatherImage)
+                }
             }
         }
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = daily.time.size
 }

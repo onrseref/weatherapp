@@ -19,15 +19,12 @@ class HomeViewModel @Inject constructor(private val weatherUseCase: WeatherUseCa
     val weatherFlow = _weatherFlow.asStateFlow()
 
     init {
-        fetchWeather("52.52", "13.41")
+        fetchWeather()
     }
 
-    private fun fetchWeather(
-        latitude: String,
-        longitude: String
-    ) {
+    private fun fetchWeather() {
         viewModelScope.launch {
-            weatherUseCase(latitude, longitude).onStart {
+            weatherUseCase().onStart {
                 _weatherFlow.emit(HomeEvent.IsLoading(true))
             }.onCompletion {
                 _weatherFlow.emit(HomeEvent.IsLoading(false))

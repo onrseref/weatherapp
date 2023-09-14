@@ -15,7 +15,6 @@ object Versions {
     const val Okhttp = "4.9.1"
     const val CoroutinesAndroid = "1.6.0"
     const val FragmentKtx = "1.4.1"
-    const val MPAndroidChart = "v3.1.0"
 
     const val Navigation = "2.3.5"
 
