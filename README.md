@@ -1,8 +1,8 @@
-# weather app
+# Weather App
 
 Clean Architecture MVVM Weather Application
 
-The modules are as follow:
+The modules are as follows:
 
 * app: Main Layer
 
